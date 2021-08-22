@@ -29,7 +29,7 @@ if(prorepo.save(new Product(productName,brandName, description, price,offer,offe
 		
 	}
 
-	public Product findByid(long editId) {
+	public Product findById(long editId) {
 	
 		Product product = prorepo.findById(editId);
 		return product;
@@ -64,6 +64,13 @@ prorepo.updateProduct(productName,brandName, description, price,offer,offerPrice
 	public void enableProduct(int enableValue, long productId) {
 		prorepo.enableProduct(enableValue,productId);
 		
+	}
+
+	public List<Product> getProducts(long categoryId) {
+
+		List<Product> products = prorepo.getProducts(categoryId);
+		
+		return products;
 	}
 
 //	public void deleteProduct(long productId) {
