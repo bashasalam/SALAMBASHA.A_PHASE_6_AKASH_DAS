@@ -2,15 +2,12 @@ package com.salambasha.medicare.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -20,14 +17,16 @@ public class User {
 	private long userId;
 	private String fullName;
 	private String email;
-	private double mobile;
+	private long mobile;
 	private String password;
 	
-	@OneToOne(mappedBy="theUser", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,
-			CascadeType.REFRESH},fetch = FetchType.LAZY, orphanRemoval = true)
-	//@JoinColumn(name = "cart_id")
-	private Cart cart;
+//	@OneToOne(mappedBy="theUser", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,
+//			CascadeType.REFRESH},fetch = FetchType.LAZY, orphanRemoval = true)
+//	//@JoinColumn(name = "cart_id")
+//	private Cart cart;
 	
+	@OneToMany(mappedBy="theUser")
+	private List<Cart> carts;
 	
 	@OneToMany(mappedBy="theUser")
 	private List<Address> address;
@@ -44,7 +43,7 @@ public class User {
 	
 	
 	
-	public User(String fullName, String email, double mobile, String password) {
+	public User(String fullName, String email, long mobile, String password) {
 		super();
 		this.fullName = fullName;
 		this.email = email;
@@ -97,10 +96,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public double getMobile() {
+	public long getMobile() {
 		return mobile;
 	}
-	public void setMobile(double mobile) {
+	public void setMobile(long mobile) {
 		this.mobile = mobile;
 	}
 	public String getPassword() {
@@ -109,6 +108,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+
+	public List<Cart> getCarts() {
+		return carts;
+	}
+
+
+
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
+	}
+
+
+
 	
 
 	
